@@ -18,6 +18,14 @@ prompts = [
         "favorite": False
     }
 ]
+categories = [
+    "텍스트 생성",
+    "이미지 생성",
+    "영상 생성",
+    "페르소나",
+    "자동화",
+    "기타"
+]
 def show_menu():
     print("=== 나만의 프롬프트 관리 ===")
     print("1. 프롬프트 추가")
@@ -45,10 +53,29 @@ def add_prompt():
         print("내용은 비워둘 수 없습니다.")
 
     while True:
-        category = input("카테고리: ").strip()
-        if category:
+        print("\n카테고리 선택:")
+
+        for index, category in enumerate(categories, start=1):
+            print(f"{index}) {category}")
+
+        print("7) 직접 입력")
+
+        category_choice = input("선택: ").strip()
+
+        if category_choice in ["1", "2", "3", "4", "5", "6"]:
+            category = categories[int(category_choice) - 1]
             break
-        print("카테고리는 비워둘 수 없습니다.")
+
+        elif category_choice == "7":
+            category = input("카테고리 직접 입력: ").strip()
+
+            if category:
+                break
+
+            print("카테고리는 비워둘 수 없습니다.")
+
+        else:
+            print("잘못된 선택입니다. 다시 선택해주세요.")
 
     new_prompt = {
         "title": title,
@@ -60,6 +87,7 @@ def add_prompt():
     prompts.append(new_prompt)
 
     print("프롬프트가 추가되었습니다!")
+  
     
 while True:
     show_menu()
