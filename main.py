@@ -32,9 +32,23 @@ def show_menu():
 def add_prompt():
     print("=== 프롬프트 추가 ===")
 
-    title = input("제목: ")
-    content = input("내용: ")
-    category = input("카테고리: ")
+    while True:
+        title = input("제목: ").strip()
+        if title:
+            break
+        print("제목은 비워둘 수 없습니다.")
+
+    while True:
+        content = input("내용: ").strip()
+        if content:
+            break
+        print("내용은 비워둘 수 없습니다.")
+
+    while True:
+        category = input("카테고리: ").strip()
+        if category:
+            break
+        print("카테고리는 비워둘 수 없습니다.")
 
     new_prompt = {
         "title": title,
@@ -46,19 +60,6 @@ def add_prompt():
     prompts.append(new_prompt)
 
     print("프롬프트가 추가되었습니다!")
-
-def show_list():
-    print("=== 프롬프트 목록 ===")
-
-    if not prompts:
-        print("등록된 프롬프트가 없습니다.")
-        return
-
-    for index, prompt in enumerate(prompts, start=1):
-        star = " ⭐" if prompt["favorite"] else ""
-        print(f'{index}. [{prompt["category"]}] {prompt["title"]}{star}')
-
-    print(f"\n총 {len(prompts)}개의 프롬프트")
     
 while True:
     show_menu()
